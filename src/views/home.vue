@@ -1,8 +1,5 @@
 <template>
-     <div v-show="showAddTask">
-         <AddTask @add-task ="addTask"/>
-     </div>
-   
+         <AddTask v-show="showAddTask" @add-task ="addTask"/>
      <Task @delete-task2="deleteTask" :Task="tasks"></Task>
 </template>
 
@@ -12,6 +9,9 @@ import AddTask from '../components/AddTask'
 
 export default {
     name: 'Home',
+    props: {
+      showAddTask: Boolean
+    },
     components: {
         Task,
         AddTask
@@ -45,9 +45,6 @@ export default {
       const data = await res.json()
 
       this.tasks = [...this.tasks, data]
-    },
-    showTask(){
-      this.showAddTask = !this.showAddTask
     },
     async fetchTasks(){
       const res = await fetch('api/tasks')

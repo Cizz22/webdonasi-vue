@@ -1,7 +1,6 @@
 <template>
   <div class="container">
      <Header :showAddTask ="showAddTask" @show-addTask="showTask" title ="Task Tracker"/>
-      <Home></Home>  
      <router-view :showAddTask="showAddTask"></router-view>
      <Footer/>
   </div>
@@ -10,19 +9,22 @@
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Home from './views/home'
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
-    Home
   }, 
   data() {
     return{
       showAddTask: false
     }
   },
+  methods: {
+     showTask(){
+      this.showAddTask = !this.showAddTask
+    },
+  }
 }
 </script>
 
