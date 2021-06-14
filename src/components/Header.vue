@@ -1,40 +1,26 @@
 <template>
-    <header>
-        <h1>{{title}}</h1>
-        <Button v-show="homePage" @show-addTask ="$emit('show-addTask')" :color="showAddTask ? 'red' : 'green' " :Text="showAddTask ? 'Close' : 'Add Task'"
-        />
-    </header>
+    <div>
+
+        <header>
+            <div class="bg-gray-700 text-white text-center fixed inset-x-0 top-0 z-10">
+                <div class="container mx-auto grid grid-cols-10 p-3 sm:w-full md:w-5/12">
+                    <div class="col-span-2 bg-white rounded-full h-10 w-10 p-1 mr-3 shadow-sm">
+                        <a href="">
+                            <img src="../assets/images/muslim.png" class="inline-block">
+                        </a>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" class="appearance-none w-full rounded-full placeholder-white shadow-md p-5 h-5 bg-gray-500 focus:outline-none focus:bg-white focus:placeholder-gray-600 focus-within:text-gray-600" placeholder="Apa yang kamu cari?">
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+    </div>
 </template>
 
 <script>
-import Button from './Button'
 export default {
-    name: 'Header',
-    props: {
-        title: String,
-        showAddTask: Boolean
-    },
-    components: {
-        Button
-    },
-    emits: ['show-addTask'],
-    computed: {
-        homePage(){
-            if(this.$route.path == '/'){
-                return true
-            }else{
-                return false
-            }
-        }
-    }
+    
 }
 </script>
-
-<style scoped>
-    header{
-        display: flex;
-        justify-content: space-between;
-        align-content: center;
-        margin-bottom: 20px;
-    }
-</style>
