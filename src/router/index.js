@@ -49,6 +49,16 @@ const routes = [
         name:'home.index',
         component: () => import('@/views/home/Index.vue'),
     },
+    {
+        path:'/category',
+        name:'category.index',
+        component: () => import('@/views/category/Index.vue'),
+    },
+    {
+        path:'/category/:slug',
+        name:'category.show',
+        component: () => import('@/views/category/Show.vue'),
+    },
 
 ];
 

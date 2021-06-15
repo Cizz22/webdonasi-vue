@@ -82,7 +82,7 @@ import CategoryHome from '@/components/CategoryHome.vue'
 import Slider from '@/components/Slider.vue'
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
- import { FacebookLoader } from 'vue-content-loader'
+import { FacebookLoader } from 'vue-content-loader'
 
 export default {
     components:{
