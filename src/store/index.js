@@ -5,6 +5,7 @@ import donation from './modules/donation'
 import profile from './modules/profile'
 import slider from './modules/slider'
 import categoryHome from './modules/categoryHome'
+import campaign from './modules/campaign'
 
 const store = createStore({
     modules:{
@@ -12,7 +13,8 @@ const store = createStore({
         donation,
         profile,
         slider,
-        categoryHome
+        categoryHome,
+        campaign
     }
 })
 

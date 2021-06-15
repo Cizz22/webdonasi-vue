@@ -9,8 +9,8 @@ import mixins from './mixins'
 
 
 createApp(App)
+.mixin(mixins)
 .use(router)
 .use(store)
 .use(Toast)
-.use(mixins)
 .mount('#app')
