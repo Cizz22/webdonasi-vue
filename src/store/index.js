@@ -4,7 +4,7 @@ import auth from './modules/auth'
 import donation from './modules/donation'
 import profile from './modules/profile'
 import slider from './modules/slider'
-import category from './modules/category'
+import categoryHome from './modules/categoryHome'
 
 const store = createStore({
     modules:{
@@ -12,7 +12,7 @@ const store = createStore({
         donation,
         profile,
         slider,
-        category
+        categoryHome
     }
 })
 
