@@ -36,13 +36,13 @@
                     </div>
                 </router-link>
 
-                <a href="#">
+                <router-link :to="{name: 'profile.password'}" href="#">
                     <div class="grid grid-cols-5 gap-4 bg-gray-300 p-3 rounded-md shadow-sm mb-3">
                         <div class="col-span-5">
                             <i class="fa fa-key" aria-hidden="true"></i> Ubah Password
                         </div>
                     </div>
-                </a>
+                </router-link>
 
                 <a @click = "logout" href="">
                     <div class="grid grid-cols-5 gap-4 bg-gray-300 p-3 rounded-md shadow-sm mb-3">
@@ -61,14 +61,10 @@
 <script>
 //hook vuex
     import { useStore } from 'vuex'
-    
-    //hook vue
+
     import { computed, onMounted } from 'vue'
 
     import {useToast} from 'vue-toastification'
-
-    // Same interface as this.$toast
-    const toast = useToast()
 
     import { useRouter } from 'vue-router'
 
@@ -78,6 +74,8 @@ export default {
         const store = useStore()
 
         const router = useRouter()
+
+        const toast = useToast()
 
         onMounted(() => {
             store.dispatch('auth/getUser')
@@ -100,6 +98,7 @@ export default {
         return{
             user,
             logout,
+            toast
         }
 
     }

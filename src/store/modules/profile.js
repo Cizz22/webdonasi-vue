@@ -45,6 +45,29 @@ const profile = {
                     reject(error.response.data)
                 })
             })
+        },
+
+        updatePassword({commit}, user){
+           return new Promise((resolve, reject) => {
+            const {password, password_confirmation} = user
+
+            const token = localStorage.getItem('token')
+
+            Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+            Api.post('/profile/password', {
+                password,
+                password_confirmation
+            })
+            .then((response) => {
+                commit('SET_PROFILE', response.data.data)
+
+                resolve(response)
+            })
+            .catch((error) => {
+                reject(error)
+            })
+           })  
         }
     },
     getters:{

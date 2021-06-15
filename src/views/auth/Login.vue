@@ -72,7 +72,7 @@ export default {
 
         async function login(){
             try {
-                const dispatchLogin = await store.dispatch('auth/login', {
+            let dispatchLogin = await store.dispatch('auth/login', {
                     email: user.email,
                     password: user.password
                 })
