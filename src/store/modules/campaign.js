@@ -35,7 +35,7 @@ const campaign = {
 
                 if(res.data.data.current_page < res.data.data.last_page){
                     commit('SET_NEXTEXIST', true)
-
+                    
                     commit('SET_NEXTPAGE', res.data.data.current_page+1 )
                 }
                 else commit('SET_NEXTEXIST', false)
@@ -49,7 +49,7 @@ const campaign = {
                 let res =  await Api.get(`/campaign?page=${nextPage}`)
 
                 commit('SET_LOADMORE', res.data.data.data)
-
+         
                 if(res.data.data.current_page < res.data.data.last_page){
                     commit('SET_NEXTEXIST', true)
 

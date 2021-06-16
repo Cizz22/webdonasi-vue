@@ -1,21 +1,20 @@
 <template>
     <div class="pb-20 pt-20">
-           <div class="container p-5 mx-auto grid grid-cols-1 sm:w-full md:w-5/12">
-           
-                <div v-if="campaignCategory.length > 0">
-                    <h3> <i class="fa fa-list-ul"></i> KATEGORI <strong>{{ category.name.toUpperCase() }}</strong></h3>
-
-                    <div class="grid grid-cols-4 gap-4 mt-5" v-for="campaign in campaignCategory" :key="campaign.id">
-                        <div class="col-span-4">
-                            <div class="bg-white rounded-md shadow-md p-3">
-                                <div class="md:flex rounded-xl md:p-0">
+        
+        <div class="containe mx-auto p-5 grid grid-cols-1 sm:w-full md:w-5/12"> 
+        
+            <div v-if="campaigns.length > 0">
+                <div class="mt-5 grid grid-cols-4 gap-4" v-for="campaign in campaigns" :key="campaign.id">
+                    <div class="col-span-4">
+                        <div class="p-2 rounded-md bg-white shadow-md">
+                            <div class="md:flex rounded-xl md:p-0">
                                <img :src="campaign.image" srcset="" class="w-full h-34 rounded object-cover md:w-56"  width="384" height="512">
                                <div class="w-full pt-6 p-5 md:p-3 text-center md:text-left space-y-4">
-                                   <a href="">
-                                       <p class="text-sm font-semibold">
+                                   <router-link :to="{name: 'campaign.show', params:{slug: campaign.slug}}" >
+                                       <p class="text-sm font-semibold hover:text-gray-700 text-gray-500">
                                            {{campaign.title}}
                                        </p>
-                                   </a>
+                                   </router-link>
                                    <div class="font-medium">
                                        <p class="mt-3 text-gray-500 text-xs">
                                            {{campaign.user.name}}
@@ -54,50 +53,60 @@
                                    </div>
                                </div>
                             </div>
-                            </div>
                         </div>
-
                     </div>
                 </div>
-                <div v-else>
-                    <div class="mb-3 bg-red-500 px-4 py-2 rounded-md text-white"><strong>BELUM TERSEDIA</strong></div>
-                </div>
-
-           </div>
-    </div>
+            </div> 
+             <div v-else>
+                 <div v-for="index in 2" :key="index" class="grid grid-cols-1 bg-white rounded shadow-md p-3 text-sm mt-4 mb-4">
+                    <FacebookLoader class="h-24"/>
+                </div>    
+            </div> 
+            <div class="text-center mt-4 mb-4" v-show="nextExist">
+                <a @click="loadMore" class="bg-gray-700 text-white cursor-pointer py-2 px-4 rounded-md shadow-md focus:outline-none">
+                    LIHAT SELEBIHNYA <i class="fa fa-long-arrow-alt-right"></i>
+                </a>
+            </div>  
+        </div>
+    </div>    
 </template>
-
 <script>
 import {onMounted, computed} from 'vue'
-
 import {useStore} from 'vuex'
-
-import {useRoute} from 'vue-router'
+import {FacebookLoader} from 'vue-content-loader'
 
 export default {
+    components:{
+        FacebookLoader
+    },
     setup(){
         const store = useStore()
-        const router = useRoute()
 
         onMounted(() => {
-            store.dispatch('categoryHome/showCategory', router.params.slug)
+            store.dispatch('campaign/getCampaign')
         })
 
-        const category = computed(() => {
-            return store.state.categoryHome.category
+        const campaigns = computed(() => {
+            return store.state.campaign.campaigns
         })
 
-        const campaignCategory = computed(() => {
-            return store.state.categoryHome.campaignCategory
+        const nextExist = computed(() => {
+            return store.state.campaign.nextExist
+        })
+        const nextPage = computed(() => {
+            return store.state.campaign.nextPage
         })
 
-        return{
-            campaignCategory,
-            category
+        function loadMore(){
+            store.dispatch('campaign/loadMore', nextPage.value)
         }
 
-        
+        return{
+            campaigns,
+            nextExist,
+            nextPage,
+            loadMore
+        }
     }
-
 }
 </script>

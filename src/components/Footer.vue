@@ -15,10 +15,10 @@
                     </a>
                 </div>
                 <div>
-                    <a href="" class="w-full text-center inline-block">
+                    <router-link :to="{name: 'campaign.index'}" class="w-full text-center inline-block">
                         <img src="../assets/images/flag.png" class="inline-block mb-1 w-10 h-10">
                         <span class="block text-xs">Campaign</span>
-                    </a>
+                    </router-link>
                 </div>
                 <div>
                     <router-link :to="{name: 'login'}" class="w-full text-center inline-block">
