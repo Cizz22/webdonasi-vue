@@ -65,4 +65,4 @@ const campaign = {
     }
 }
 
-export default campaign
+export default campaign 
