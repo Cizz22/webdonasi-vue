@@ -6,7 +6,8 @@ const campaign = {
     state:{
         campaigns: [],
         nextExist: false,
-        nextPage:0
+        nextPage:0,
+        campaign:{}
     },
     mutations:{
         SET_CAMPAIGN(state, data){
@@ -22,6 +23,9 @@ const campaign = {
             data.forEach(row => {
                 state.campaigns.push(row)
             });
+        },
+        DETAIL_CAMPAIGN(state, data){
+            state.campaign = data
         }
     },
     actions:{
@@ -56,6 +60,15 @@ const campaign = {
                     commit('SET_NEXTPAGE', res.data.data.current_page+1 )
                 }
                 else commit('SET_NEXTEXIST', false)
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        async showCampaign({commit}, slug){
+            try {
+                let res = await Api.get(`campaign/${slug}`)
+                commit('DETAIL_CAMPAIGN', res.data.data.campaign)
             } catch (error) {
                 console.log(error)
             }
