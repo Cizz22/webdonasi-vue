@@ -25,13 +25,13 @@
                         <label for="" class="mt-2">
                             Password
                         </label>
-                        <input v-model="user.password" type="text" class="appearance-none w-full rounded-md p-5 h-4 mt-2 bg-gray-200 border shadow-sm focus:bg-white focus:outline-none text-gray-500" >
+                        <input v-model="user.password" type="password" class="appearance-none w-full rounded-md p-5 h-4 mt-2 bg-gray-200 border shadow-sm focus:bg-white focus:outline-none text-gray-500" >
                     </div>
                       <div class="mb-2">
                         <label for="" class="mt-2">
                             Konfirmasi Password
                         </label>
-                        <input v-model="user.password_confirmation" type="text" class="appearance-none w-full rounded-md p-5 h-4 mt-2 bg-gray-200 border shadow-sm focus:bg-white focus:outline-none text-gray-500" >
+                        <input v-model="user.password_confirmation" type="password" class="appearance-none w-full rounded-md p-5 h-4 mt-2 bg-gray-200 border shadow-sm focus:bg-white focus:outline-none text-gray-500" >
                     </div>
 
                     <div class="mt-4">

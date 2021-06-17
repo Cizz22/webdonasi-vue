@@ -69,6 +69,15 @@ const routes = [
         name:'campaign.show',
         component: () => import('@/views/campaign/Show.vue'),
     },
+    {
+        path:'/donation/create/:slug',
+        name:'donation.create',
+        component: () => import('@/views/donation/create.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+
 
 ];
 

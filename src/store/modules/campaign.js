@@ -7,7 +7,10 @@ const campaign = {
         campaigns: [],
         nextExist: false,
         nextPage:0,
-        campaign:{}
+        campaign:{},
+        donations:[],
+        sumDonation:[],
+        user:{}
     },
     mutations:{
         SET_CAMPAIGN(state, data){
@@ -26,7 +29,16 @@ const campaign = {
         },
         DETAIL_CAMPAIGN(state, data){
             state.campaign = data
-        }
+        },
+        DETAIL_CAMPAIGN_DONATION(state, data){
+            state.donations = data
+        },
+        DETAIL_CAMPAIGN_USER(state, data){
+            state.user = data
+        },
+        DETAIL_CAMPAIGN_SUMDONATION(state, data){
+            state.sumDonation = data
+        },
     },
     actions:{
 
@@ -69,6 +81,9 @@ const campaign = {
             try {
                 let res = await Api.get(`campaign/${slug}`)
                 commit('DETAIL_CAMPAIGN', res.data.data.campaign)
+                commit('DETAIL_CAMPAIGN_DONATION', res.data.data.donations)
+                commit('DETAIL_CAMPAIGN_USER', res.data.data.campaign.user)
+                commit('DETAIL_CAMPAIGN_SUMDONATION', res.data.data.campaign.sum_donation)
             } catch (error) {
                 console.log(error)
             }
