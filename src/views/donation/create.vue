@@ -12,13 +12,13 @@
                     <label class="mt-2 font-bold text-lg">Rp.</label>
                     <input type="number"
                         class="mt-2 appearance-none w-full bg-gray-200 border border-gray-200 rounded h-15 shadow-sm placeholder-gray-600 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600 p-2 text-right text-xl"
-                        placeholder="0" >
+                        placeholder="0" v-model="donation.amount">
                 </div>
 
                 <div class="mb-2">
                     <label class="mt-2 font-bold text-lg">Do'a</label>
-                    <textarea rows="3" 
-                        class="mt-2 appearance-none w-full bg-gray-200 border border-gray-200 rounded shadow-sm placeholder-gray-600 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600 p-5" placeholder="Tulis Do'a/Ucapan">
+                    <textarea v-model="donation.pray" rows="3" 
+                        class="mt-2 appearance-none w-full bg-gray-200 border border-gray-200 rounded shadow-sm placeholder-gray-600 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600 p-5" >
                     </textarea>
                 </div>
                 <div class="mt-5">
@@ -34,15 +34,17 @@ import { reactive, ref, computed } from "vue";
 
 import { useStore } from "vuex";
 
-import {useRoute} from 'vue-router'
+import {useRouter, useRoute} from 'vue-router'
 
-import useToast from 'vue-toastification'
+import {useToast} from 'vue-toastification'
 
 export default {
     setup(){
         const store = useStore()
 
         const route = useRoute()
+
+        const router = useRouter()
 
         const toast = useToast()
 
@@ -54,18 +56,22 @@ export default {
 
         async function storeDonation(){
             if(donation.amount < 10000){
-                toast.error('Donasi Minimal Rp. 10.000')
+                toast.error("Donasi Minimal Rp. 10.000")
                 return false
             }
-
             try {
-                store.dispatch('')
+                let res = await store.dispatch('donation/storeDonation', donation)
+                toast.success("Donasi Berhasil Dibuat")
+                router.push({name: 'donation.index'})
             } catch (error) {
-                
+                console.log(error)
             }
 
         }
-
+        return{
+            storeDonation,
+            donation
+        }
 
     }
 }

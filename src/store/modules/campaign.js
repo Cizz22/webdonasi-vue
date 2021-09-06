@@ -80,10 +80,11 @@ const campaign = {
         async showCampaign({commit}, slug){
             try {
                 let res = await Api.get(`campaign/${slug}`)
+                console.log(res)
                 commit('DETAIL_CAMPAIGN', res.data.data.campaign)
                 commit('DETAIL_CAMPAIGN_DONATION', res.data.data.donations)
                 commit('DETAIL_CAMPAIGN_USER', res.data.data.campaign.user)
-                commit('DETAIL_CAMPAIGN_SUMDONATION', res.data.data.campaign.sum_donation)
+                commit('DETAIL_CAMPAIGN_SUMDONATION', res.data.data.campaign.sum_donation.total)
             } catch (error) {
                 console.log(error)
             }

@@ -52,6 +52,26 @@ const donation = {
             }
         },
 
+        async storeDonation({commit}, donation){
+            
+            return new Promise((resolve,reject) => {
+                const token = localStorage.getItem('token')
+                Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+                Api.post('/donation', donation)
+                .then((res) => {
+                    commit('')
+                    console.log(res)
+                    resolve(res)
+                }).catch((error) => {
+                    reject(error)
+                })
+            })
+           
+
+
+        }
+
         
 
     },
